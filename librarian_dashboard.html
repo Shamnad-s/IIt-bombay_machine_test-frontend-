@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">
+                Librarian dashboard
+            </a>
+            <div class="d-flex">
+                <button id="logoutBtn" class="btn btn-outline-light"> Log out</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+             <li class="nav-item" role="presentation">
+                <button class="nav-link active"  id="books-tab"data-bs-toggle="tab"type="button" data-bs-target="#books" aria-controls="books" aria-selected="true"> Manage books</button>
+             </li>
+             <li class="nav-item" role="presentation">
+                <button class="nav-link "  id="members-tab"data-bs-toggle="tab" type="button" data-bs-target="#members"aria-controls="books" aria-selected="true"> Manage members</button>
+             </li>
+             <li class="nav-item" role="presentation">
+                <button class="nav-link " id="history-tab"data-bs-toggle="tab"type="button" data-bs-target="#history" aria-controls="books" aria-selected="true">View history</button>
+             </li>
+        </ul>
+        <div class="tab-content" id="dashboardTabscontent">
+            <div class="tab-pane fade show active" id="books" role="tabpanel" aria-labelledby="books-tab">
+                <h3 class="mt-4">
+                    Manage books
+                </h3>
+                <form id="addBookForm" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input type="text" id="bookTitle"class="form-control" placeholder="Book Title" required>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" id="bookAuthor"class="form-control" placeholder="Author" required>
+                        </div>
+                        <div class="col-md-5">
+                          <button type="submit" class="btn btn-primary w-100">Add book</button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-striped" id="booksTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
+                <h3 class="mt-4">
+                    Manage Members
+                </h3>
+                <form id="addMemberForm" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input type="text" id="memeberUsername"class="form-control" placeholder="Name" required>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" id="memberPassword"class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="col-md-5">
+                          <button type="submit" class="btn btn-primary w-100">Add member</button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-striped" id="membersTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                           
+                            <th>Status</th>
+                            <th>Action</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                <h3 class="mt-4">
+                    Manage history
+                </h3>
+                <table class="table table-striped" id="hsitoryTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Book title</th>
+                            <th>Borrowed data</th>
+                            <th>Return date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="librarienMessage" class="mt-3"></div>
+    </div>
+    <div class="modal fade" id="editMemberModal" tabindex="-1"aria-labelledby="editMemberModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editMemberModalLabel">
+                            Edit member
+                        </h5>
+                        <button type="button"  class="btn-close"data-bs-dismiss="modal"aria-label = "close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editMemberForm">
+                            <div class="mb-3">
+                                <label for="editUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control"id="editUsername" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPassword" class="form-label">Password</label>
+                                <input type="text" class="form-control"id="editPassword" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editIsActive" class="form-label">Status</label>
+                                <select class="form-select" id="editIsActive" required>
+                                    <option value="true">Active</option>
+                                    <option value="false">Delete</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                      
+                    </div>
+                </div>
+              </div>
+    </div>
+    <div class="modal fade" id="editBookModal" tabindex="-1"aria-labelledby="editBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="editBookModalLabel">
+                      Edit Book
+                  </h5>
+                  <button type="button"  class="btn-close"data-bs-dismiss="modal"aria-label = "close"></button>
+              </div>
+              <div class="modal-body">
+                  <form id="editUserForm">
+                      <div class="mb-3">
+                          <label for="editTitle" class="form-label">Title</label>
+                          <input type="text" class="form-control"id="editTitle" required>
+                      </div>
+                      <div class="mb-3">
+                          <label for="editAuthor" class="form-label">Author</label>
+                          <input type="text" class="form-control"id="editAuthor" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editStatus" required>
+                            <option value="Available">Available</option>
+                            <option value="Borrowed">Borrowed</option>
+                        </select>
+                    </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                
+              </div>
+          </div>
+        </div>
+</div>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/librarian.js"></script>
+</body>
+</html>

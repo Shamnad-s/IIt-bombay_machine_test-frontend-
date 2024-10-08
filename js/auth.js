@@ -14,26 +14,25 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password, role }),
         });
-        console.log(response);
 
         const data = await response.json();
         const signupMessage = document.getElementById("signupMessage");
-        console.log(response && response.ok, "lllllllll");
 
         if (response && response.ok) {
           localStorage.setItem("token", data.token);
           const decodedToken = parseJwt(data.token);
-          console.log(decodedToken, "kkkkkkk");
 
+          localStorage.setItem("user_id", decodedToken._id);
+          localStorage.setItem("username", decodedToken.username);
           if (decodedToken.role == "Librarian") {
             window.location.href = "librarian_dashboard.html";
           } else if (decodedToken.role == "Member") {
             window.location.href = "member_dashboard.html";
           } else {
-            signupMessage.innerHTML = `<div class="alert-danger">{{data.message || 'Invalid role.'}}</div>`;
+            signupMessage.innerHTML = `<div class="alert-danger">Invalid role.</div>`;
           }
         } else {
-          signupMessage.innerHTML = `<div class="alert-danger">{{data.message || 'Sign up failed'}}</div>`;
+          signupMessage.innerHTML = `<div class="alert-danger">'Sign up failed'</div>`;
         }
       });
     } catch (error) {
@@ -54,24 +53,23 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
         });
-        console.log(response);
 
         const data = await response.json();
         const loginMessage = document.getElementById("loginMessage");
-        console.log(response, "responseresponseresponse");
 
         if (response && response.ok) {
           localStorage.setItem("token", data.token);
           const decodedToken = parseJwt(data.token);
-          console.log(decodedToken);
 
+          localStorage.setItem("user_id", decodedToken._id);
+          localStorage.setItem("username", decodedToken.username);
           if (decodedToken.role == "Librarian") {
             window.location.href = "librarian_dashboard.html";
           } else {
             window.location.href = "member_dashboard.html";
           }
         } else {
-          loginMessage.innerHTML = `<div class="alert-danger">{{data.message || 'Log in failed'}}</div>`;
+          loginMessage.innerHTML = `<div class="alert-danger">${data.message}</div>`;
         }
       });
     } catch (error) {

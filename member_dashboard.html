@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">
+                Member dashboard
+            </a>
+            <div class="d-flex">
+                <span id="username" style="margin: auto;" class="text-white me-3"></span>
+                <button id="logoutBtn" class="btn btn-outline-light"> Log out</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+             <li class="nav-item" role="presentation">
+                <button class="nav-link active"  id="available-books-tab"data-bs-toggle="tab"type="button" data-bs-target="#available-books" aria-controls="books" aria-selected="true">Avalable books</button>
+             </li>
+             <li class="nav-item" role="presentation">
+                <button class="nav-link "  id="borrowing-history-tab"data-bs-toggle="tab" type="button" data-bs-target="#borrowing-history"aria-controls="books" aria-selected="true">Borrowing history</button>
+             </li>
+             <li class="nav-item" role="presentation">
+                <button class="nav-link " id="account-tab"data-bs-toggle="tab"type="button" data-bs-target="#account" aria-controls="books" aria-selected="true">Account</button>
+             </li>
+        </ul>
+        <div class="tab-content" id="dashboardTabscontent">
+            <div class="tab-pane fade show active" id="available-books" role="tabpanel" aria-labelledby="books-tab">
+                <h3 class="mt-4">
+                    Manage books
+                </h3>
+                
+
+                <table class="table table-striped" id="available-booksTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <div id="Membermessage" class="mt-3"></div>
+            </div>
+
+
+
+            <div class="tab-pane fade" id="borrowing-history" role="tabpanel" aria-labelledby="borrowing-history">
+                <h3 class="mt-4">
+                    Your borrowing history
+                </h3>
+                
+
+                <table class="table table-striped" id="borrowing-history-Table">
+                    <thead>
+                        <tr>
+                            <th>Book title</th>
+                           
+                            <th>Borrowed at</th>
+                            <th>Returned at</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
+                <h3 class="mt-4">
+                    Manage Your Account
+                </h3>
+                <button id="deleteMyaccount" class="btn btn-danger"> Delete my account</button>
+                <div id="accountMessage" class="mt-3"></div>
+            </div>
+        </div>
+        <!-- <div id="Membermessage" class="mt-3"></div> -->
+    </div>
+   
+       
+          <!-- <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="editBookModalLabel">
+                      Edit Book
+                  </h5>
+                  <button type="button"  class="btn-close"data-bs-dismiss="modal"aria-label = "close"></button>
+              </div>
+              <div class="modal-body">
+                  <form id="editUserForm">
+                      <div class="mb-3">
+                          <label for="editTitle" class="form-label">Title</label>
+                          <input type="text" class="form-control"id="editTitle" required>
+                      </div>
+                      <div class="mb-3">
+                          <label for="editAuthor" class="form-label">Author</label>
+                          <input type="text" class="form-control"id="editAuthor" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editStatus" required>
+                            <option value="Available">Available</option>
+                            <option value="Borrowed">Borrowed</option>
+                        </select>
+                    </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                
+              </div>
+          </div> -->
+        </div> 
+
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/member.js"></script>
+</body>
+</html>
+
+<style>
+    .navbar {
+  box-shadow: 0px 2px 5px rgb(0, 0, 0, 0.2);
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+#username {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.btn-outline-light {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  transition: back-ground-color 0.3s, color 0.3s;
+}
+.btn-outline-light :hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.text-white {
+  margin: auto;
+  padding: 0.5rem;
+}
+
+</style>

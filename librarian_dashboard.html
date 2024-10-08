@@ -14,6 +14,7 @@
                 Librarian dashboard
             </a>
             <div class="d-flex">
+                <span id="username" style="margin: auto;" class="text-white me-3"></span>
                 <button id="logoutBtn" class="btn btn-outline-light"> Log out</button>
             </div>
         </div>
@@ -37,14 +38,14 @@
                 </h3>
                 <form id="addBookForm" class="mb-4">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <input type="text" id="bookTitle"class="form-control" placeholder="Book Title" required>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <input type="text" id="bookAuthor"class="form-control" placeholder="Author" required>
                         </div>
-                        <div class="col-md-5">
-                          <button type="submit" class="btn btn-primary w-100">Add book</button>
+                        <div class="col-md-3">
+                          <button type="submit" class="btn btn-primary btn-small">Add book</button>
                         </div>
                     </div>
                 </form>
@@ -62,8 +63,9 @@
 
                     </tbody>
                 </table>
+                <div id="librarienMessage" class="mt-3"></div>
             </div>
-
+           
 
 
             <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
@@ -72,14 +74,14 @@
                 </h3>
                 <form id="addMemberForm" class="mb-4">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <input type="text" id="memeberUsername"class="form-control" placeholder="Name" required>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <input type="text" id="memberPassword"class="form-control" placeholder="Password" required>
                         </div>
-                        <div class="col-md-5">
-                          <button type="submit" class="btn btn-primary w-100">Add member</button>
+                        <div class="col-md-3">
+                          <button type="submit" class="btn btn-primary btn-small">Add member</button>
                         </div>
                     </div>
                 </form>
@@ -98,6 +100,7 @@
                         
                     </tbody>
                 </table>
+                <div id="librarienMessagesecond" class="mt-3"></div>
             </div>
 
 
@@ -120,7 +123,7 @@
                 </table>
             </div>
         </div>
-        <div id="librarienMessage" class="mt-3"></div>
+        <!-- <div id="librarienMessage" class="mt-3"></div> -->
     </div>
     <div class="modal fade" id="editMemberModal" tabindex="-1"aria-labelledby="editMemberModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -148,7 +151,7 @@
                                     <option value="false">Delete</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-small">Submit</button>
                         </form>
                       
                     </div>
@@ -192,3 +195,59 @@
     <script src="js/librarian.js"></script>
 </body>
 </html>
+
+<style>
+    .navbar {
+  box-shadow: 0px 2px 5px rgb(0, 0, 0, 0.2);
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+#username {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.btn-outline-light {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  transition: back-ground-color 0.3s, color 0.3s;
+}
+.btn-outline-light :hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.text-white {
+  margin: auto;
+  padding: 0.5rem;
+}
+#addBookForm{
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+#addBookForm.form-control{
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+
+}
+#addBookForm.form-control :focus{
+ border-color: #007bff;
+ border: none;
+ border-radius: 5px;
+ font-size: 1rem;
+ padding: 10px;
+ transition: background-color 0.3s,transform 0,3s;
+  
+}
+#addBookForm.btn-primary:hover{
+    background-color: #0056b3;
+    transform: translate(-2px);
+    
+}
+.col-md-2{
+    display: flex;
+    justify-content: flex-start;
+}
+</style>

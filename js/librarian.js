@@ -8,8 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
     return;
   }
+  const username = localStorage.getItem("username");
+  if (username) {
+    document.getElementById("username").textContent = username;
+  }
   initializeBooks();
   getMembers();
+  initializeHistory();
+
   const logoutBtn = document.getElementById("logoutBtn");
 
   logoutBtn.addEventListener("click", () => {
@@ -23,12 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const author = document.getElementById("bookAuthor").value.trim();
     const response = await fetch(`${server_url}/generatebooks`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ title, author }),
     });
     const data = await response.json();
     const librarianMessage = document.getElementById("librarienMessage");
-    console.log(response && response.ok);
+   
 
     if (response && response.ok) {
       librarianMessage.innerHTML = `<div class="alert alert-successs">Book added successfully</div>`;
@@ -46,11 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById("memberPassword").value.trim();
     const response = await fetch(`${server_url_two}/add-new-mebers`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
-    const librarianMessage = document.getElementById("librarienMessage");
+    const librarianMessage = document.getElementById("librarienMessagesecond");
 
     if (response && response.ok) {
       librarianMessage.innerHTML = `<div class="alert alert-successs">User added successfully</div>`;
@@ -104,7 +116,7 @@ function deleteBook(id) {
       })
       .then((data) => {
         const librarianMessage = document.getElementById("librarienMessage");
-        console.log(data, "datadatadata");
+      
 
         if (data.meassage) {
           librarianMessage.innerHTML = `<div classs="alert alert-success">${data.meassage}</div>`;
@@ -122,10 +134,8 @@ function deleteBook(id) {
   }
 }
 function editBook(id, title, author, status) {
-  //   let newtitle = prompt("Enter a new title", title);
-  //   let newAuthor = prompt("Enter a new author", author);
-  //   let newStaus = prompt("Enter a new status(AVAILABLE/BORROWED)", status);
-  console.log(status);
+
+
 
   document.getElementById("editTitle").value = title;
   document.getElementById("editAuthor").value = author;
@@ -137,10 +147,8 @@ function editBook(id, title, author, status) {
     const status = document.getElementById("editStatus").value;
 
     const updateData = { title: title, author: author, status: status };
-    // const editedModal = new bootstrap.Modal(
-    //   document.getElementById("editMemberModal")
-    // );
-    console.log(updateData, "updateDataupdateDataupdateData");
+
+
 
     fetch(`${server_url}/updatebook/${id}`, {
       method: "PUT",
@@ -151,13 +159,13 @@ function editBook(id, title, author, status) {
       body: JSON.stringify(updateData),
     })
       .then((response) => {
-        console.log(response);
+
 
         return response.json();
       })
       .then((data) => {
         const librarianMessage = document.getElementById("librarienMessage");
-        console.log(data, "llllllllllll");
+      
 
         if (data.meassage) {
           librarianMessage.innerHTML = `<div classs="alert alert-success">${data.meassage}</div>`;
@@ -179,7 +187,6 @@ function editBook(id, title, author, status) {
     document.getElementById("editBookModal")
   );
   editBookModal.show();
- 
 }
 async function getMembers() {
   const token = localStorage.getItem("token");
@@ -227,7 +234,7 @@ function deleteUsers(id, username, isAactive) {
       })
       .then((data) => {
         const librarianMessage = document.getElementById("librarienMessage");
-        console.log(data, "datadatadata");
+       
 
         if (data.message) {
           librarianMessage.innerHTML = `<div classs="alert alert-success">${data.message}</div>`;
@@ -245,13 +252,12 @@ function deleteUsers(id, username, isAactive) {
   }
 }
 function editUser(id, username, isActive) {
-  console.log(username, isActive);
+
 
   document.getElementById("editUsername").value = username;
   document.getElementById("editIsActive").value = isActive ? "true" : "false";
 
   const editMemberForm = document.getElementById("editMemberForm");
-  
 
   editMemberForm.onsubmit = function (event) {
     event.preventDefault();
@@ -276,7 +282,7 @@ function editUser(id, username, isActive) {
       body: JSON.stringify(updateData),
     })
       .then((response) => {
-        console.log(response);
+     
 
         return response.json();
       })
@@ -302,4 +308,45 @@ function editUser(id, username, isActive) {
     document.getElementById("editMemberModal")
   );
   editMemberModal.show();
+}
+async function initializeHistory() {
+  const token = localStorage.getItem("token");
+  const booksTableBody = document.querySelector("#hsitoryTable tbody");
+  booksTableBody.innerHTML = " ";
+  const response = await fetch(`${server_url_two}/hsitory`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const books = await response.json();
+
+  if (response && response.ok) {
+   
+
+    books.forEach((book) => {
+      const returnDate = book.returnedAt ? formateDate(book.returnedAt) : "";
+      const borrowedDate = book.boorowedAt ? formateDate(book.boorowedAt) : "";
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+      <td>${book.username}</td>
+      <td>${book.title}</td>
+      <td>${borrowedDate}</td>
+      <td>${returnDate}</td>
+  
+      `;
+      booksTableBody.append(tr);
+    });
+  } else {
+    booksTableBody.innerHTML = ` <tr>
+          <td colspan="4" class="text-danger">
+            "Failed to load books"
+          </td>
+        </tr>`;
+  }
+}
+function formateDate(data) {
+  const date = new Date(data);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
 }

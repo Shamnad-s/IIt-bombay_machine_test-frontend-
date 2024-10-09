@@ -21,21 +21,10 @@ Authorization Middleware:
 
 4.JWT (JSON Web Token)-based authentication to secure API routes.
 
-🔧 Setup Instructions
 
-Clone the Repository:git clone https://github.com/Shamnad-s/IIT-bombay_machine_test_backend.git
 
-Install Dependencies:npm install
 
-Configure Environment Variables:
-Create a .env file with the following variables: 
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-PORT=your_port_number
-Start the Server: 
-npm run dev
 
-Your application should now be running at http://localhost:3000
 
 📑 Additional Information
 Table Structure:

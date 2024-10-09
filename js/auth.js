@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
           } else if (decodedToken.role == "Member") {
             window.location.href = "member_dashboard.html";
           } else {
-            signupMessage.innerHTML = `<div class="alert-danger">Invalid role.</div>`;
+            signupMessage.innerHTML = `<div class="alert-danger">${data.message}</div>`;
           }
         } else {
-          signupMessage.innerHTML = `<div class="alert-danger">'Sign up failed'</div>`;
+          signupMessage.innerHTML = `<div class="alert-danger">${data.message}</div>`;
         }
       });
     } catch (error) {

@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     const data = await response.json();
     const librarianMessage = document.getElementById("librarienMessage");
-   
 
     if (response && response.ok) {
       librarianMessage.innerHTML = `<div class="alert alert-successs">Book added successfully</div>`;
@@ -65,11 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const librarianMessage = document.getElementById("librarienMessagesecond");
 
     if (response && response.ok) {
-      librarianMessage.innerHTML = `<div class="alert alert-successs">User added successfully</div>`;
+      librarianMessage.innerHTML = `<div class="alert alert-successs">${data.message}</div>`;
       addMemberForm.reset();
       getMembers();
     } else {
-      librarianMessage.innerHTML = `<div class="alert alert-successs">Failed</div>`;
+      librarianMessage.innerHTML = `<div class="alert alert-successs">${data.message}</div>`;
     }
   });
 });
@@ -116,7 +115,6 @@ function deleteBook(id) {
       })
       .then((data) => {
         const librarianMessage = document.getElementById("librarienMessage");
-      
 
         if (data.meassage) {
           librarianMessage.innerHTML = `<div classs="alert alert-success">${data.meassage}</div>`;
@@ -134,9 +132,6 @@ function deleteBook(id) {
   }
 }
 function editBook(id, title, author, status) {
-
-
-
   document.getElementById("editTitle").value = title;
   document.getElementById("editAuthor").value = author;
   document.getElementById("editStatus").value = status;
@@ -148,8 +143,6 @@ function editBook(id, title, author, status) {
 
     const updateData = { title: title, author: author, status: status };
 
-
-
     fetch(`${server_url}/updatebook/${id}`, {
       method: "PUT",
       headers: {
@@ -159,13 +152,10 @@ function editBook(id, title, author, status) {
       body: JSON.stringify(updateData),
     })
       .then((response) => {
-
-
         return response.json();
       })
       .then((data) => {
         const librarianMessage = document.getElementById("librarienMessage");
-      
 
         if (data.meassage) {
           librarianMessage.innerHTML = `<div classs="alert alert-success">${data.meassage}</div>`;
@@ -234,7 +224,6 @@ function deleteUsers(id, username, isAactive) {
       })
       .then((data) => {
         const librarianMessage = document.getElementById("librarienMessage");
-       
 
         if (data.message) {
           librarianMessage.innerHTML = `<div classs="alert alert-success">${data.message}</div>`;
@@ -252,8 +241,6 @@ function deleteUsers(id, username, isAactive) {
   }
 }
 function editUser(id, username, isActive) {
-
-
   document.getElementById("editUsername").value = username;
   document.getElementById("editIsActive").value = isActive ? "true" : "false";
 
@@ -282,8 +269,6 @@ function editUser(id, username, isActive) {
       body: JSON.stringify(updateData),
     })
       .then((response) => {
-     
-
         return response.json();
       })
       .then((data) => {
@@ -320,8 +305,6 @@ async function initializeHistory() {
   const books = await response.json();
 
   if (response && response.ok) {
-   
-
     books.forEach((book) => {
       const returnDate = book.returnedAt ? formateDate(book.returnedAt) : "";
       const borrowedDate = book.boorowedAt ? formateDate(book.boorowedAt) : "";

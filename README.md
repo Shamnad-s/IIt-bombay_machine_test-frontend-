@@ -1,4 +1,4 @@
-📚 Library Management System
+ 📚 Library Management System
 This project is a Library Management System built using Node.js and Express.js for the backend. The system allows users to manage and maintain book collections and member records, handling essential functionalities like adding, updating, deleting, and viewing books and members. It also includes authentication features to protect restricted actions like managing the library's inventory.
 
 🚀 Key Features

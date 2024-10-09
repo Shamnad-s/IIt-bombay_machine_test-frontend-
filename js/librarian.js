@@ -1,7 +1,7 @@
 // import bootstrap = require("bootstrap");
 
-const server_url = "http://localhost:3000/api/books";
-const server_url_two = "http://localhost:3000/api/members";
+const server_url = "https://bookmanagement-npfr8kno.b4a.run/api/books";
+const server_url_two = "https://bookmanagement-npfr8kno.b4a.run/api/members";
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
   if (!token) {

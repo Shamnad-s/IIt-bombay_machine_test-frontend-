@@ -1,5 +1,5 @@
-const server_url = "http://localhost:3000/api/books";
-const server_url_two = "http://localhost:3000/api/members";
+const server_url = "https://bookmanagement-npfr8kno.b4a.run/api/books";
+const server_url_two = "https://bookmanagement-npfr8kno.b4a.run/api/members";
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (username) {
     document.getElementById("username").textContent = username;
   }
-
 
   initializeBooks();
   initializeHistory();
@@ -113,7 +112,6 @@ function borrowOrReturnBook(id, title, status) {
       })
       .then((data) => {
         const librarianMessage = document.getElementById("Membermessage");
-   
 
         if (data.meassage) {
           librarianMessage.innerHTML = `<div classs="alert alert-success">Status updated successfully</div>`;
@@ -151,7 +149,6 @@ async function initializeHistory() {
 
   if (response && response.ok) {
     if (books.user.borrowedbooks && books.user.borrowedbooks.length) {
-   
       books.user.borrowedbooks.forEach((book) => {
         const returnDate = book.returnedAt ? formateDate(book.returnedAt) : "";
         const borrowedDate = book.boorowedAt

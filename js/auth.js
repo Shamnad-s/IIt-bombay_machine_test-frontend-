@@ -1,4 +1,4 @@
-const server_url = "http://localhost:3000/api/auth";
+const server_url = "https://bookmanagement-npfr8kno.b4a.run/api/auth";
 
 document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signupForm");
